@@ -104,7 +104,6 @@ namespace oClock
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
-
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
 
