@@ -7,11 +7,12 @@
     <x:Double x:Key="NarrowMinWidth">0</x:Double>
     <x:Double x:Key="NormalMinWidth">521</x:Double>
     <x:Double x:Key="WideMinWidth">1200</x:Double>
-    <AcrylicBrush x:Key="AppChromeAcrylicHostBackdropMediumLowBrush"
-                              BackgroundSource="HostBackdrop"
-                              FallbackColor="{ThemeResource SystemChromeMediumColor}"
-                              TintColor="{ThemeResource SystemChromeLowColor}"
-                              TintOpacity="0.7"/>
+    <AcrylicBrush
+        x:Key="AppChromeAcrylicHostBackdropMediumLowBrush"
+        BackgroundSource="HostBackdrop"
+        FallbackColor="{ThemeResource SystemChromeMediumColor}"
+        TintColor="{ThemeResource SystemChromeLowColor}"
+        TintOpacity="0.7" />
 
     <!--<SolidColorBrush x:Key="AppChromeAcrylicHostBackdropMediumLowBrush" Color="{ThemeResource SystemChromeMediumColor}"/>-->
 </ResourceDictionary>

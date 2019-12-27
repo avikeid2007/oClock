@@ -8,7 +8,6 @@
     Background="{ThemeResource AppChromeAcrylicHostBackdropMediumLowBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -54,7 +53,7 @@
                 x:Name="TimeTxt"
                 HorizontalAlignment="Center"
                 FontFamily="Calibri"
-                Text="{Binding CurrentTime, Mode=TwoWay}" />
+                Text="{Binding RemainingTime, Mode=TwoWay}" />
         </StackPanel>
         <StackPanel
             Grid.Row="3"
@@ -62,13 +61,19 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Horizontal">
-            <Button x:Name="ClockBtn" Background="Transparent">
+            <Button
+                x:Name="ClockBtn"
+                Background="Transparent"
+                Command="{Binding CurrentCheckInTimeCommand}">
                 <TextBlock
                     x:Name="ClockIcon"
                     FontFamily="Segoe MDL2 Assets"
                     Text="&#xF272;" />
             </Button>
-            <Button x:Name="KeyboardBtn" Background="Transparent">
+            <Button
+                x:Name="KeyboardBtn"
+                Background="Transparent"
+                Command="{Binding InputCheckInTimeCommand}">
                 <TextBlock
                     x:Name="KeyBoardIcon"
                     FontFamily="Segoe MDL2 Assets"
