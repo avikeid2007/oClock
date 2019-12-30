@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Abstraction\IAsyncCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\AsyncCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Observable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DialogButtons.cs" />

@@ -1,6 +1,8 @@
 ﻿using oClock.Shared.Core;
 using oClock.Shared.Helpers;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 
 namespace oClock.Shared.ViewModels
@@ -11,41 +13,68 @@ namespace oClock.Shared.ViewModels
 
         public ClockViewModel()
         {
+
             RemainingTime = "--:--:--";
             IsTimePickerVisible = Visibility.Collapsed;
             IsButtonVisible = Visibility.Visible;
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
-            CurrentCheckInTimeCommand = new RelayCommand(OnCurrentCheckInTimeCommandExecuted);
-            InputCheckInTimeCommand = new RelayCommand(OnInputCheckInTimeCommandExecuted);
+            CurrentCheckInTimeCommand = new AsyncCommand(OnCurrentCheckInTimeCommandExecutedAsync);
+            InputCheckInTimeCommand = new AsyncCommand(OnInputCheckInTimeCommandExecutedAsync);
+#if NETFX_CORE
+            var todayTime = GetTodayCheckInTime();
+            if (!string.IsNullOrEmpty(todayTime))
+            {
+                TodayCheckInTime = TimeSpan.Parse(todayTime);
+            }
+#endif
         }
 
-        private void OnInputCheckInTimeCommandExecuted()
+        private async Task OnInputCheckInTimeCommandExecutedAsync()
         {
-            IsTimePickerVisible = Visibility.Visible;
-            IsButtonVisible = Visibility.Collapsed;
-            //TimePicker arrivalTimePicker = new TimePicker();
-            //var time = arrivalTimePicker.Time;
+
+#if NETFX_CORE
+            if (await CheckInExistAsync())
+            {
+                IsTimePickerVisible = Visibility.Visible;
+                IsButtonVisible = Visibility.Collapsed;
+            }
+#endif
         }
 
-        private async void OnCurrentCheckInTimeCommandExecuted()
+        private async Task OnCurrentCheckInTimeCommandExecutedAsync()
         {
-            var toDayTime = LocalSettingsHelper.GetContainerValue<string>(SettingContainer.CheckInTime, DateTime.Now.Date.ToString());
+#if NETFX_CORE
+            if (await CheckInExistAsync())
+            {
+                TodayCheckInTime = DateTime.Now.TimeOfDay;
+            }
+#else
+            TodayCheckInTime = DateTime.Now.TimeOfDay;
+#endif
+        }
+        private async Task<bool> CheckInExistAsync()
+        {
+            string toDayTime = GetTodayCheckInTime();
             if (!string.IsNullOrEmpty(toDayTime))
             {
                 var response = await DialogHelper.ConfirmAsync("Today's Checkin Time already exist, Do you want to update?", "oClock", DialogButtons.YesNo);
                 if (response == DialogResults.No)
                 {
-                    return;
+                    return false;
                 }
             }
-            TodayCheckInTime = DateTime.Now.TimeOfDay;
-            LocalSettingsHelper.MarkContainer(SettingContainer.CheckInTime, DateTime.Now.Date.ToString(), TodayCheckInTime);
+            return true;
         }
 
-        public RelayCommand CurrentCheckInTimeCommand { get; set; }
-        public RelayCommand InputCheckInTimeCommand { get; set; }
+        private static string GetTodayCheckInTime()
+        {
+            return LocalSettingsHelper.GetContainerValue<string>(SettingContainer.CheckInTime, DateTime.Now.Date.ToString());
+        }
+
+        public ICommand CurrentCheckInTimeCommand { get; set; }
+        public ICommand InputCheckInTimeCommand { get; set; }
         private string _remainingTime;
         private Visibility _isButtonVisible;
         private Visibility _isTimePickerVisible;
@@ -88,6 +117,9 @@ namespace oClock.Shared.ViewModels
                 {
                     IsTimePickerVisible = Visibility.Collapsed;
                     IsButtonVisible = Visibility.Visible;
+#if NETFX_CORE
+                    LocalSettingsHelper.MarkContainer(SettingContainer.CheckInTime, DateTime.Now.Date.ToString(), value);
+#endif
                 }
 
             }
