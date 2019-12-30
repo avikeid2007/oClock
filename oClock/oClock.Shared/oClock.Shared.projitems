@@ -20,6 +20,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Core\Observable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DialogButtons.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DialogHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DialogResults.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalSettingsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClockViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Clock.xaml.cs">
       <DependentUpon>Clock.xaml</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using oClock.Shared.Core;
+using oClock.Shared.Helpers;
 using System;
 using Windows.UI.Xaml;
 
@@ -7,6 +8,7 @@ namespace oClock.Shared.ViewModels
     public class ClockViewModel : Observable
     {
         readonly DispatcherTimer Timer = new DispatcherTimer();
+
         public ClockViewModel()
         {
             RemainingTime = "--:--:--";
@@ -27,11 +29,19 @@ namespace oClock.Shared.ViewModels
             //var time = arrivalTimePicker.Time;
         }
 
-        private void OnCurrentCheckInTimeCommandExecuted()
+        private async void OnCurrentCheckInTimeCommandExecuted()
         {
+            var toDayTime = LocalSettingsHelper.GetContainerValue<string>(SettingContainer.CheckInTime, DateTime.Now.Date.ToString());
+            if (!string.IsNullOrEmpty(toDayTime))
+            {
+                var response = await DialogHelper.ConfirmAsync("Today's Checkin Time already exist, Do you want to update?", "oClock", DialogButtons.YesNo);
+                if (response == DialogResults.No)
+                {
+                    return;
+                }
+            }
             TodayCheckInTime = DateTime.Now.TimeOfDay;
-
-
+            LocalSettingsHelper.MarkContainer(SettingContainer.CheckInTime, DateTime.Now.Date.ToString(), TodayCheckInTime);
         }
 
         public RelayCommand CurrentCheckInTimeCommand { get; set; }
