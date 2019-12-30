@@ -9,6 +9,9 @@ namespace oClock.Shared.ViewModels
         readonly DispatcherTimer Timer = new DispatcherTimer();
         public ClockViewModel()
         {
+            RemainingTime = "--:--:--";
+            IsTimePickerVisible = Visibility.Collapsed;
+            IsButtonVisible = Visibility.Visible;
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
@@ -18,12 +21,15 @@ namespace oClock.Shared.ViewModels
 
         private void OnInputCheckInTimeCommandExecuted()
         {
-
+            IsTimePickerVisible = Visibility.Visible;
+            IsButtonVisible = Visibility.Collapsed;
+            //TimePicker arrivalTimePicker = new TimePicker();
+            //var time = arrivalTimePicker.Time;
         }
 
         private void OnCurrentCheckInTimeCommandExecuted()
         {
-            TodayCheckInTime = DateTime.Now;
+            TodayCheckInTime = DateTime.Now.TimeOfDay;
 
 
         }
@@ -31,28 +37,52 @@ namespace oClock.Shared.ViewModels
         public RelayCommand CurrentCheckInTimeCommand { get; set; }
         public RelayCommand InputCheckInTimeCommand { get; set; }
         private string _remainingTime;
+        private Visibility _isButtonVisible;
+        private Visibility _isTimePickerVisible;
+        private TimeSpan? _todayCheckIntime;
+        private string _currentTime;
 
+        public TimeSpan MaxHrs { get; set; } = new TimeSpan(9, 0, 0);
+        public Visibility IsButtonVisible
+        {
+            get { return _isButtonVisible; }
+            set
+            {
+                Set(ref _isButtonVisible, value);
+            }
+        }
+        public Visibility IsTimePickerVisible
+        {
+            get { return _isTimePickerVisible; }
+            set
+            {
+                Set(ref _isTimePickerVisible, value);
+            }
+        }
         public string RemainingTime
         {
             get { return _remainingTime; }
             set
             {
-
                 Set(ref _remainingTime, value);
             }
         }
-        public TimeSpan MaxHrs { get; set; } = new TimeSpan(9, 0, 0);
-        private DateTime? _todayCheckIntime;
-        public DateTime? TodayCheckInTime
+
+        public TimeSpan? TodayCheckInTime
         {
             get { return _todayCheckIntime; }
             set
             {
                 Set(ref _todayCheckIntime, value);
+                if (value != null)
+                {
+                    IsTimePickerVisible = Visibility.Collapsed;
+                    IsButtonVisible = Visibility.Visible;
+                }
+
             }
         }
 
-        private string _currentTime;
         public string CurrentTime
         {
             get { return _currentTime; }
@@ -69,9 +99,8 @@ namespace oClock.Shared.ViewModels
                 RemainingTime = "--:--:--";
                 return;
             }
-            var time = DateTime.Now.Subtract(TodayCheckInTime.Value);
-            var rem = MaxHrs.Subtract(time);
-            RemainingTime = rem.ToString();
+            RemainingTime = MaxHrs.Subtract(DateTime.Now.TimeOfDay.Subtract(TodayCheckInTime.Value)).ToString(@"hh\:mm\:ss");
+
 
         }
     }
