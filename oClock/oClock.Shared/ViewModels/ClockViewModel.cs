@@ -22,41 +22,50 @@ namespace oClock.Shared.ViewModels
             Timer.Start();
             CurrentCheckInTimeCommand = new AsyncCommand(OnCurrentCheckInTimeCommandExecutedAsync);
             InputCheckInTimeCommand = new AsyncCommand(OnInputCheckInTimeCommandExecutedAsync);
-#if NETFX_CORE
-            var todayTime = GetTodayCheckInTime();
+            //#if NETFX_CORE
+            SetTimerAsync();
+            //#endif
+        }
+
+        private async Task SetTimerAsync()
+        {
+            var todayTime = await GetTodayCheckInTimeAsync();
             if (!string.IsNullOrEmpty(todayTime))
             {
                 TodayCheckInTime = TimeSpan.Parse(todayTime);
             }
-#endif
         }
 
         private async Task OnInputCheckInTimeCommandExecutedAsync()
         {
 
-#if NETFX_CORE
+            //#if NETFX_CORE
             if (await CheckInExistAsync())
             {
                 IsTimePickerVisible = Visibility.Visible;
                 IsButtonVisible = Visibility.Collapsed;
             }
-#endif
+            //#else
+            //                IsTimePickerVisible = Visibility.Visible;
+            //                IsButtonVisible = Visibility.Collapsed;
+
+            //#endif
         }
 
         private async Task OnCurrentCheckInTimeCommandExecutedAsync()
         {
-#if NETFX_CORE
+            //#if NETFX_CORE
             if (await CheckInExistAsync())
             {
                 TodayCheckInTime = DateTime.Now.TimeOfDay;
             }
-#else
-            TodayCheckInTime = DateTime.Now.TimeOfDay;
-#endif
+            //#else
+            //            TodayCheckInTime = DateTime.Now.TimeOfDay;
+            //#endif
         }
         private async Task<bool> CheckInExistAsync()
         {
-            string toDayTime = GetTodayCheckInTime();
+            string toDayTime = await GetTodayCheckInTimeAsync();
             if (!string.IsNullOrEmpty(toDayTime))
             {
                 var response = await DialogHelper.ConfirmAsync("Today's Checkin Time already exist, Do you want to update?", "oClock", DialogButtons.YesNo);
@@ -68,9 +77,29 @@ namespace oClock.Shared.ViewModels
             return true;
         }
 
-        private static string GetTodayCheckInTime()
+        private async Task<string> GetTodayCheckInTimeAsync()
         {
-            return LocalSettingsHelper.GetContainerValue<string>(SettingContainer.CheckInTime, DateTime.Now.Date.ToString());
+            try
+            {
+                return LocalSettingsHelper.GetContainerValue<string>(SettingContainer.CheckInTime, DateTime.Now.Date.ToString());
+            }
+            catch (Exception ex)
+            {
+                await DialogHelper.AlertAsync(ex.Message);
+                return string.Empty;
+            }
+
+        }
+        private async Task SetTodayCheckInTimeAsync(TimeSpan? value)
+        {
+            try
+            {
+                LocalSettingsHelper.MarkContainer(SettingContainer.CheckInTime, DateTime.Now.Date.ToString(), value);
+            }
+            catch (Exception ex)
+            {
+                await DialogHelper.AlertAsync(ex.Message);
+            }
         }
 
         public ICommand CurrentCheckInTimeCommand { get; set; }
@@ -117,13 +146,15 @@ namespace oClock.Shared.ViewModels
                 {
                     IsTimePickerVisible = Visibility.Collapsed;
                     IsButtonVisible = Visibility.Visible;
-#if NETFX_CORE
-                    LocalSettingsHelper.MarkContainer(SettingContainer.CheckInTime, DateTime.Now.Date.ToString(), value);
-#endif
+                    //#if NETFX_CORE
+                    SetTodayCheckInTimeAsync(value);
+                    //#endif
                 }
 
             }
         }
+
+
 
         public string CurrentTime
         {

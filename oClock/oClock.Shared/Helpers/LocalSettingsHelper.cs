@@ -9,13 +9,11 @@ namespace oClock.Shared.Helpers
 
         public static void MarkContainer<T>(SettingContainer container, string containerValue, T value)
         {
-            _ = LocalSettings.CreateContainer(container.ToString(), ApplicationDataCreateDisposition.Always);
             LocalSettings.Containers[container.ToString()].Values[containerValue] = value != null ? JsonConvert.SerializeObject(value) : null;
         }
 
         public static T GetContainerValue<T>(SettingContainer container, string containerValue)
         {
-            _ = LocalSettings.CreateContainer(container.ToString(), ApplicationDataCreateDisposition.Always);
             if (!(LocalSettings.Containers[container.ToString()].Values[containerValue] is string currentValue))
             {
                 return default;
