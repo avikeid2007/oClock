@@ -60,7 +60,8 @@
             Margin="0,0,0,8"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Horizontal">
+            Orientation="Horizontal"
+            Visibility="{Binding IsButtonVisible}">
             <Button
                 x:Name="ClockBtn"
                 Background="Transparent"
@@ -80,6 +81,15 @@
                     Text="&#xF260;" />
             </Button>
         </StackPanel>
+        <TimePicker
+            Grid.Row="3"
+            Margin="0,0,0,8"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            ClockIdentifier="24HourClock"
+            Header="CheckIn Time"
+            Time="{Binding TodayCheckInTime, Mode=TwoWay}"
+            Visibility="{Binding IsTimePickerVisible}" />
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
