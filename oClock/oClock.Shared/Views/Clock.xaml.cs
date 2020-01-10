@@ -11,6 +11,7 @@ namespace oClock.Shared.Views
     public sealed partial class Clock : Page
     {
         public ClockViewModel ViewModel { get; } = new ClockViewModel();
+
         public Clock()
         {
             this.InitializeComponent();

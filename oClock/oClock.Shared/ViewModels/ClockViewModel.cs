@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 
 namespace oClock.Shared.ViewModels
 {
+
     public class ClockViewModel : Observable
     {
         readonly DispatcherTimer Timer = new DispatcherTimer();
@@ -23,7 +24,7 @@ namespace oClock.Shared.ViewModels
             CurrentCheckInTimeCommand = new AsyncCommand(OnCurrentCheckInTimeCommandExecutedAsync);
             InputCheckInTimeCommand = new AsyncCommand(OnInputCheckInTimeCommandExecutedAsync);
             //#if NETFX_CORE
-            SetTimerAsync();
+            _ = SetTimerAsync();
             //#endif
         }
 
