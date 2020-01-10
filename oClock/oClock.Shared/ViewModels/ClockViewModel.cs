@@ -1,4 +1,5 @@
-﻿using oClock.Shared.Core;
+﻿using BasicMvvm;
+using BasicMvvm.Commands;
 using oClock.Shared.Helpers;
 using System;
 using System.Threading.Tasks;
@@ -7,7 +8,8 @@ using Windows.UI.Xaml;
 
 namespace oClock.Shared.ViewModels
 {
-    public class ClockViewModel : Observable
+
+    public class ClockViewModel : BindableBase
     {
         readonly DispatcherTimer Timer = new DispatcherTimer();
 
@@ -23,7 +25,7 @@ namespace oClock.Shared.ViewModels
             CurrentCheckInTimeCommand = new AsyncCommand(OnCurrentCheckInTimeCommandExecutedAsync);
             InputCheckInTimeCommand = new AsyncCommand(OnInputCheckInTimeCommandExecutedAsync);
             //#if NETFX_CORE
-            SetTimerAsync();
+            _ = SetTimerAsync();
             //#endif
         }
 
@@ -147,7 +149,7 @@ namespace oClock.Shared.ViewModels
                     IsTimePickerVisible = Visibility.Collapsed;
                     IsButtonVisible = Visibility.Visible;
                     //#if NETFX_CORE
-                    SetTodayCheckInTimeAsync(value);
+                    _ = SetTodayCheckInTimeAsync(value);
                     //#endif
                 }
 
