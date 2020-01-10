@@ -118,14 +118,14 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  TODO: change properties for normal view  -->
-                        <Setter Target="TaskTxt.FontSize" Value="32" />
-                        <Setter Target="CurrentTimeTxt.FontSize" Value="32" />
-                        <Setter Target="RemTxt.FontSize" Value="52" />
-                        <Setter Target="TimeTxt.FontSize" Value="64" />
-                        <Setter Target="ClockBtn.Width" Value="96" />
-                        <Setter Target="ClockBtn.Height" Value="96" />
-                        <Setter Target="KeyboardBtn.Width" Value="96" />
-                        <Setter Target="KeyboardBtn.Height" Value="96" />
+                        <Setter Target="TaskTxt.FontSize" Value="24" />
+                        <Setter Target="CurrentTimeTxt.FontSize" Value="24" />
+                        <Setter Target="RemTxt.FontSize" Value="36" />
+                        <Setter Target="TimeTxt.FontSize" Value="48" />
+                        <Setter Target="ClockBtn.Width" Value="52" />
+                        <Setter Target="ClockBtn.Height" Value="52" />
+                        <Setter Target="KeyboardBtn.Width" Value="52" />
+                        <Setter Target="KeyboardBtn.Height" Value="52" />
 
 
                     </VisualState.Setters>
@@ -135,14 +135,14 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TaskTxt.FontSize" Value="64" />
-                        <Setter Target="CurrentTimeTxt.FontSize" Value="64" />
-                        <Setter Target="RemTxt.FontSize" Value="108" />
-                        <Setter Target="TimeTxt.FontSize" Value="128" />
-                        <Setter Target="ClockBtn.Width" Value="192" />
-                        <Setter Target="ClockBtn.Height" Value="192" />
-                        <Setter Target="KeyboardBtn.Width" Value="192" />
-                        <Setter Target="KeyboardBtn.Height" Value="192" />
+                        <Setter Target="TaskTxt.FontSize" Value="32" />
+                        <Setter Target="CurrentTimeTxt.FontSize" Value="32" />
+                        <Setter Target="RemTxt.FontSize" Value="40" />
+                        <Setter Target="TimeTxt.FontSize" Value="52" />
+                        <Setter Target="ClockBtn.Width" Value="58" />
+                        <Setter Target="ClockBtn.Height" Value="58" />
+                        <Setter Target="KeyboardBtn.Width" Value="58" />
+                        <Setter Target="KeyboardBtn.Height" Value="58" />
 
                     </VisualState.Setters>
                 </VisualState>
