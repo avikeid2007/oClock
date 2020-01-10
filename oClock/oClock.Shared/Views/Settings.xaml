@@ -16,6 +16,104 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-    </Grid>
 
+        <Grid
+            Grid.Row="3"
+            Margin="0,0,0,8"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="BackBtn"
+                Grid.Column="0"
+                Background="Transparent"
+                Command="{Binding BackCommand}">
+                <Viewbox MaxWidth="100" MaxHeight="100">
+                    <SymbolIcon Symbol="Back" />
+                </Viewbox>
+            </Button>
+            <Button
+                x:Name="SaveBtn"
+                Grid.Column="1"
+                Background="Transparent"
+                Command="{Binding InputCheckInTimeCommand}">
+                <Viewbox MaxWidth="100" MaxHeight="100">
+                    <SymbolIcon Symbol="Save" />
+                </Viewbox>
+            </Button>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                    <VisualState x:Name="VisualStateNarrow">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!--  TODO: change properties for narrow view  -->
+                            <!--<Setter Target="TaskTxt.FontSize" Value="16" />
+                            <Setter Target="CurrentTimeTxt.FontSize" Value="16" />
+                            <Setter Target="SettingIcon.Width" Value="32" />
+                            <Setter Target="SettingIcon.Height" Value="32" />
+                            <Setter Target="ClockIcon.Width" Value="16" />
+                            <Setter Target="ClockIcon.Height" Value="16" />
+                            <Setter Target="RemTxt.FontSize" Value="24" />
+                            <Setter Target="TimeTxt.FontSize" Value="32" />-->
+
+                            <Setter Target="BackBtn.Width" Value="48" />
+                            <Setter Target="BackBtn.Height" Value="48" />
+                            <Setter Target="SaveBtn.Width" Value="48" />
+                            <Setter Target="SaveBtn.Height" Value="48" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="VisualStateNormal">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!--  TODO: change properties for normal view  -->
+                            <!--<Setter Target="TaskTxt.FontSize" Value="24" />-->
+                            <!--<Setter Target="CurrentTimeTxt.FontSize" Value="24" />
+                            <Setter Target="SettingIcon.Width" Value="48" />
+                            <Setter Target="SettingIcon.Height" Value="48" />
+                            <Setter Target="ClockIcon.Width" Value="24" />
+                            <Setter Target="ClockIcon.Height" Value="24" />
+                            <Setter Target="RemTxt.FontSize" Value="36" />
+                            <Setter Target="TimeTxt.FontSize" Value="48" />-->
+
+                            <Setter Target="BackBtn.Width" Value="52" />
+                            <Setter Target="BackBtn.Height" Value="52" />
+                            <Setter Target="SaveBtn.Width" Value="52" />
+                            <Setter Target="SaveBtn.Height" Value="52" />
+
+
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="VisualStateWide">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <!--<Setter Target="TaskTxt.FontSize" Value="32" />-->
+                            <!--<Setter Target="CurrentTimeTxt.FontSize" Value="32" />
+                            <Setter Target="SettingIcon.Width" Value="52" />
+                            <Setter Target="SettingIcon.Height" Value="52" />
+                            <Setter Target="ClockIcon.Width" Value="32" />
+                            <Setter Target="ClockIcon.Height" Value="32" />
+                            <Setter Target="RemTxt.FontSize" Value="40" />
+                            <Setter Target="TimeTxt.FontSize" Value="52" />-->
+
+                            <Setter Target="BackBtn.Width" Value="56" />
+                            <Setter Target="BackBtn.Height" Value="56" />
+                            <Setter Target="SaveBtn.Width" Value="56" />
+                            <Setter Target="SaveBtn.Height" Value="56" />
+
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </Grid>
 </Page>
