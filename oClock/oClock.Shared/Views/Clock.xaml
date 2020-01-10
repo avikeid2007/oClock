@@ -39,6 +39,7 @@
                 HorizontalAlignment="Left"
                 FontFamily="Calibri"
                 Text="Session : 1/4" />
+
         </Grid>
         <StackPanel
             Grid.Row="2"
@@ -55,35 +56,32 @@
                 FontFamily="Calibri"
                 Text="{Binding RemainingTime, Mode=TwoWay}" />
         </StackPanel>
-        <Grid
+        <StackPanel
             Grid.Row="3"
             Margin="0,0,0,8"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            Orientation="Horizontal"
             Visibility="{Binding IsButtonVisible}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Button
                 x:Name="ClockBtn"
-                Grid.Column="0"
                 Background="Transparent"
                 Command="{Binding CurrentCheckInTimeCommand}">
-                <Viewbox MaxWidth="100" MaxHeight="100">
-                    <SymbolIcon x:Name="ClockIcon" Symbol="Clock" />
-                </Viewbox>
+                <TextBlock
+                    x:Name="ClockIcon"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xF272;" />
             </Button>
             <Button
                 x:Name="KeyboardBtn"
-                Grid.Column="1"
                 Background="Transparent"
                 Command="{Binding InputCheckInTimeCommand}">
-                <Viewbox MaxWidth="100" MaxHeight="100">
-                    <SymbolIcon x:Name="KeyBoardIcon" Symbol="Keyboard" />
-                </Viewbox>
+                <TextBlock
+                    x:Name="KeyBoardIcon"
+                    FontFamily="Segoe MDL2 Assets"
+                    Text="&#xF260;" />
             </Button>
-        </Grid>
+        </StackPanel>
         <TimePicker
             Grid.Row="3"
             Margin="0,0,0,8"
@@ -106,7 +104,8 @@
                         <Setter Target="RemTxt.FontSize" Value="24" />
                         <Setter Target="TimeTxt.FontSize" Value="32" />
                         <Setter Target="ClockBtn.Width" Value="48" />
-
+                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="24" />
+                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="24" />
                         <Setter Target="ClockBtn.Height" Value="48" />
                         <Setter Target="KeyboardBtn.Width" Value="48" />
                         <Setter Target="KeyboardBtn.Height" Value="48" />
@@ -118,15 +117,16 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  TODO: change properties for normal view  -->
-                        <Setter Target="TaskTxt.FontSize" Value="32" />
-                        <Setter Target="CurrentTimeTxt.FontSize" Value="32" />
-                        <Setter Target="RemTxt.FontSize" Value="52" />
-                        <Setter Target="TimeTxt.FontSize" Value="64" />
+                        <Setter Target="TaskTxt.FontSize" Value="24" />
+                        <Setter Target="CurrentTimeTxt.FontSize" Value="24" />
+                        <Setter Target="RemTxt.FontSize" Value="32" />
+                        <Setter Target="TimeTxt.FontSize" Value="40" />
                         <Setter Target="ClockBtn.Width" Value="96" />
                         <Setter Target="ClockBtn.Height" Value="96" />
                         <Setter Target="KeyboardBtn.Width" Value="96" />
                         <Setter Target="KeyboardBtn.Height" Value="96" />
-
+                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="48" />
+                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="48" />
 
                     </VisualState.Setters>
                 </VisualState>
@@ -135,15 +135,16 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TaskTxt.FontSize" Value="64" />
-                        <Setter Target="CurrentTimeTxt.FontSize" Value="64" />
-                        <Setter Target="RemTxt.FontSize" Value="108" />
-                        <Setter Target="TimeTxt.FontSize" Value="128" />
-                        <Setter Target="ClockBtn.Width" Value="192" />
-                        <Setter Target="ClockBtn.Height" Value="192" />
-                        <Setter Target="KeyboardBtn.Width" Value="192" />
-                        <Setter Target="KeyboardBtn.Height" Value="192" />
-
+                        <Setter Target="TaskTxt.FontSize" Value="32" />
+                        <Setter Target="CurrentTimeTxt.FontSize" Value="32" />
+                        <Setter Target="RemTxt.FontSize" Value="40" />
+                        <Setter Target="TimeTxt.FontSize" Value="48" />
+                        <Setter Target="ClockBtn.Width" Value="144" />
+                        <Setter Target="ClockBtn.Height" Value="144" />
+                        <Setter Target="KeyboardBtn.Width" Value="144" />
+                        <Setter Target="KeyboardBtn.Height" Value="144" />
+                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="96" />
+                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="96" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
