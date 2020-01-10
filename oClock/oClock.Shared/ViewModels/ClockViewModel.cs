@@ -1,10 +1,12 @@
 ﻿using BasicMvvm;
 using BasicMvvm.Commands;
 using oClock.Shared.Helpers;
+using oClock.Shared.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace oClock.Shared.ViewModels
 {
@@ -24,9 +26,21 @@ namespace oClock.Shared.ViewModels
             Timer.Start();
             CurrentCheckInTimeCommand = new AsyncCommand(OnCurrentCheckInTimeCommandExecutedAsync);
             InputCheckInTimeCommand = new AsyncCommand(OnInputCheckInTimeCommandExecutedAsync);
+            SettingCommand = new DelegateCommand<object>(OnSettingCommandExecute);
             //#if NETFX_CORE
             _ = SetTimerAsync();
             //#endif
+        }
+
+        private void OnSettingCommandExecute(object obj)
+        {
+            var page = obj as Page;
+            if (page != null)
+            {
+                SettingsViewModel Vm = new SettingsViewModel();
+                page.DataContext = Vm;
+                page.Frame.Navigate(typeof(Settings));
+            }
         }
 
         private async Task SetTimerAsync()
@@ -105,6 +119,7 @@ namespace oClock.Shared.ViewModels
         }
 
         public ICommand CurrentCheckInTimeCommand { get; set; }
+        public ICommand SettingCommand { get; set; }
         public ICommand InputCheckInTimeCommand { get; set; }
         private string _remainingTime;
         private Visibility _isButtonVisible;

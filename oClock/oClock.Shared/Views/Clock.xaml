@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:oClock"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="ClockPage"
     Background="{ThemeResource AppChromeAcrylicHostBackdropMediumLowBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
@@ -59,7 +60,8 @@
                 Grid.Column="3"
                 Margin="0,0,4,0"
                 Background="Transparent"
-                Command="{Binding SettingCommand}">
+                Command="{Binding SettingCommand}"
+                CommandParameter="{Binding ElementName=ClockPage}">
                 <Viewbox MaxWidth="60" MaxHeight="60">
                     <SymbolIcon Symbol="Setting" />
                 </Viewbox>
