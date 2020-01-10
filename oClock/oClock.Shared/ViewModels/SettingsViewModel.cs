@@ -1,8 +1,8 @@
-﻿using oClock.Shared.Core;
+﻿using BasicMvvm;
 
 namespace oClock.Shared.ViewModels
 {
-    public class SettingsViewModel : Observable
+    public class SettingsViewModel : BindableBase
     {
     }
 }
