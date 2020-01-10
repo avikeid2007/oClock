@@ -55,32 +55,35 @@
                 FontFamily="Calibri"
                 Text="{Binding RemainingTime, Mode=TwoWay}" />
         </StackPanel>
-        <StackPanel
+        <Grid
             Grid.Row="3"
             Margin="0,0,0,8"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Horizontal"
             Visibility="{Binding IsButtonVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Button
                 x:Name="ClockBtn"
+                Grid.Column="0"
                 Background="Transparent"
                 Command="{Binding CurrentCheckInTimeCommand}">
-                <TextBlock
-                    x:Name="ClockIcon"
-                    FontFamily="Segoe MDL2 Assets"
-                    Text="&#xF272;" />
+                <Viewbox MaxWidth="100" MaxHeight="100">
+                    <SymbolIcon x:Name="ClockIcon" Symbol="Clock" />
+                </Viewbox>
             </Button>
             <Button
                 x:Name="KeyboardBtn"
+                Grid.Column="1"
                 Background="Transparent"
                 Command="{Binding InputCheckInTimeCommand}">
-                <TextBlock
-                    x:Name="KeyBoardIcon"
-                    FontFamily="Segoe MDL2 Assets"
-                    Text="&#xF260;" />
+                <Viewbox MaxWidth="100" MaxHeight="100">
+                    <SymbolIcon x:Name="KeyBoardIcon" Symbol="Keyboard" />
+                </Viewbox>
             </Button>
-        </StackPanel>
+        </Grid>
         <TimePicker
             Grid.Row="3"
             Margin="0,0,0,8"
@@ -103,8 +106,7 @@
                         <Setter Target="RemTxt.FontSize" Value="24" />
                         <Setter Target="TimeTxt.FontSize" Value="32" />
                         <Setter Target="ClockBtn.Width" Value="48" />
-                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="24" />
-                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="24" />
+
                         <Setter Target="ClockBtn.Height" Value="48" />
                         <Setter Target="KeyboardBtn.Width" Value="48" />
                         <Setter Target="KeyboardBtn.Height" Value="48" />
@@ -124,8 +126,7 @@
                         <Setter Target="ClockBtn.Height" Value="96" />
                         <Setter Target="KeyboardBtn.Width" Value="96" />
                         <Setter Target="KeyboardBtn.Height" Value="96" />
-                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="48" />
-                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="48" />
+
 
                     </VisualState.Setters>
                 </VisualState>
@@ -142,8 +143,7 @@
                         <Setter Target="ClockBtn.Height" Value="192" />
                         <Setter Target="KeyboardBtn.Width" Value="192" />
                         <Setter Target="KeyboardBtn.Height" Value="192" />
-                        <Setter Target="ClockBtn.(ClockIcon.FontSize)" Value="96" />
-                        <Setter Target="KeyboardBtn.(KeyBoardIcon.FontSize)" Value="96" />
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
