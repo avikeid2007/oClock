@@ -9,6 +9,8 @@
     Background="{ThemeResource AppChromeAcrylicHostBackdropMediumLowBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -37,8 +37,6 @@ namespace oClock.Shared.ViewModels
             var page = obj as Page;
             if (page != null)
             {
-                SettingsViewModel Vm = new SettingsViewModel();
-                page.DataContext = Vm;
                 page.Frame.Navigate(typeof(Settings));
             }
         }
