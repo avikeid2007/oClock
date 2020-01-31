@@ -12,7 +12,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="" />
+
+            <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
@@ -39,7 +40,7 @@
                 Grid.ColumnSpan="3"
                 HorizontalAlignment="Center"
                 FontFamily="Calibri"
-                Text="Max Office Hrs"
+                Text="Select Your City"
                 TextAlignment="Center" />
             <ComboBox
                 Grid.Row="1"
