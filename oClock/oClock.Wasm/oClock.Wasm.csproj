@@ -40,9 +40,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Uno.UI" Version="2.0.528" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="2.0.528" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.10" />
+    <PackageReference Include="Uno.UI" Version="2.1.0-dev.971" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="2.1.0-dev.951" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.1.0-dev.407" />
     <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.10" />
   </ItemGroup>
   <Import Project="..\oClock.Shared\oClock.Shared.projitems" Label="Shared" Condition="Exists('..\oClock.Shared\oClock.Shared.projitems')" />

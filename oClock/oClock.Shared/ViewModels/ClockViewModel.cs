@@ -43,10 +43,36 @@ namespace oClock.Shared.ViewModels
 
         private async Task SetTimerAsync()
         {
-            var todayTime = await GetTodayCheckInTimeAsync();
-            if (!string.IsNullOrEmpty(todayTime))
+            var time = GetMaxTime();
+            if (time != null)
             {
-                TodayCheckInTime = TimeSpan.Parse(todayTime);
+                var todayTime = await GetTodayCheckInTimeAsync();
+                if (!string.IsNullOrEmpty(todayTime))
+                {
+                    TodayCheckInTime = TimeSpan.Parse(todayTime);
+                }
+            }
+            else
+            {
+                await DialogHelper.AlertAsync("Please select Max Time in Settings");
+            }
+
+        }
+
+        private TimeSpan? GetMaxTime()
+        {
+            try
+            {
+                var time = LocalSettingsHelper.GetContainerValue<string>(SettingContainer.MaxTime, nameof(SettingContainer.MaxTime));
+                if (!string.IsNullOrEmpty(time))
+                {
+                    return TimeSpan.Parse(time);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 
@@ -125,7 +151,7 @@ namespace oClock.Shared.ViewModels
         private TimeSpan? _todayCheckIntime;
         private string _currentTime;
 
-        public TimeSpan MaxHrs { get; set; } = new TimeSpan(9, 0, 0);
+        public TimeSpan MaxHrs { get; set; }
         public Visibility IsButtonVisible
         {
             get { return _isButtonVisible; }
@@ -168,8 +194,6 @@ namespace oClock.Shared.ViewModels
 
             }
         }
-
-
 
         public string CurrentTime
         {
