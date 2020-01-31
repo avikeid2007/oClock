@@ -13,6 +13,7 @@ namespace oClock.Shared.Helpers
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(value);
             LocalSettings.Values[containerValue] = json;
 #else
+            _ = LocalSettings.CreateContainer(container.ToString(), ApplicationDataCreateDisposition.Always);
             LocalSettings.Containers[container.ToString()].Values[containerValue] = value != null ? JsonConvert.SerializeObject(value) : null;
 #endif
 
@@ -24,6 +25,8 @@ namespace oClock.Shared.Helpers
             var json = (string)ApplicationData.Current.LocalSettings.Values[containerValue];
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
 #else
+
+            _ = LocalSettings.CreateContainer(container.ToString(), ApplicationDataCreateDisposition.Always);
             if (!(LocalSettings.Containers[container.ToString()].Values[containerValue] is string currentValue))
             {
                 return default;
@@ -36,7 +39,6 @@ namespace oClock.Shared.Helpers
     public enum SettingContainer
     {
         CheckInTime,
-        MaxTime,
-
+        MaxTime
     }
 }
